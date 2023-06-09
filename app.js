@@ -10,7 +10,7 @@ require('./db/conn')
 dotenv.config({path : "./config.env"})
 let gfs;
 app.use(cors({
-    origin : process.env.BASEURL,
+    origin : [process.env.BASEURL , "http://localhost:3000/"],
     credentials: true
 }))
 app.use(express.json());
