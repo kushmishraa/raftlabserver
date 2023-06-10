@@ -77,10 +77,10 @@ router.post(`/login-validation` , async (req , res) =>{
        const validUser= await bcrypt.compare(password , userExist.password);
        if(validUser){
         const token = await userExist.generateAuthToken();
-     
+        console.log("token generated =>",token)
         res.cookie('jwtToken' , token , {
             expires : new Date(Date.now() + 2592000000),
-            httpOnly : true,
+            httpOnly : false,
           })
        return res.status(201).json({message : "User verified successfully"});
        }
