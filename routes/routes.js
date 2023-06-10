@@ -1,4 +1,3 @@
-const mongoose =  require('mongoose');
 require('../db/conn')
 const bcrypt = require('bcrypt');
 const multer  = require('multer')
@@ -8,10 +7,7 @@ const loginValidation = require('../middleware/loginValidation')
 const User = require('../model/userSchema');
 const jwt = require('jsonwebtoken')
 const BASEURL = process.env.BASEURL;
-
 const uploadToCloudinary = require('../middleware/upload');
-const user = require('../model/userSchema');
-const { json } = require('body-parser');
 
 try{
     var storage = multer.diskStorage({
@@ -24,7 +20,7 @@ try{
 });
 const upload = multer({ storage: storage })
 
-router.get("https://raftlabserver.onrender.com/",(req,res)=>{
+router.get("https://raftlabserver.onrender.com",(req,res)=>{
 res.send("hii")
 })
 
