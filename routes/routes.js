@@ -195,8 +195,8 @@ router.post(`/like`,async (req , res)=>{
 })
 
 router.post(`/fetch-comments` , async (req ,res)=>{
+    
     const username = req.body.username;
-   
     const img = req.body.image;
    
     const validUser = await User.findOne({"username" : username});
