@@ -5,7 +5,7 @@ const express = require('express')
 const router = express.Router();
 const loginValidation = require('../middleware/loginValidation')
 const User = require('../model/userSchema');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const BASEURL = process.env.BASEURL;
 const uploadToCloudinary = require('../middleware/upload');
 
@@ -154,6 +154,7 @@ router.post(`/followUser` , async (req , res)=>{
     if(userExists){
         const jwtToken = req.body.jwtToken;
         const verify = jwt.verify(jwtToken , process.env.SECRETKEY);
+        console.log("verify =>" , verify)
         const loggedInUser = await User.findOne({"_id" : verify.id});
         console.log("logged in user =>",loggedInUser);
         const alreadyFollowing = loggedInUser.following?.indexOf(userName)
