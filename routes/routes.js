@@ -245,7 +245,7 @@ router.post(`/addPost` , async(req , res)=>{
     return res.status(400).json({message : "user not found"})
 
 })
-router.get('*', function(req, res){
+router.get('https://raftlabserver.onrender.com/*', function(req, res){
     res.status(404).send('what???');
   });
 }
