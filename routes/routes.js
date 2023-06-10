@@ -153,7 +153,8 @@ router.post(`/followUser` , async (req , res)=>{
     const userExists = await User.findOne({username : userName});
     if(userExists){
         const jwtToken = req.body.jwtToken;
-        const loggedInUser = await User.findOne({authToken : jwtToken});
+        const verify = jwt.verify(jwtToken , process.env.SECRETKEY);
+        const loggedInUser = await User.findOne({"_id" : verify.id});
         console.log("logged in user =>",loggedInUser);
         const alreadyFollowing = loggedInUser.following?.indexOf(userName)
 
