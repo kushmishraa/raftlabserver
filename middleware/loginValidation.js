@@ -3,13 +3,10 @@ const user = require('../model/userSchema')
 const loginValidation = async (req , res , next) =>{
    try{ 
     const token = req.body.jwtToken
-    console.log("token => " , token)
-   
     const verify = jwt.verify(token , process.env.SECRETKEY);
-    console.log("verify=>",verify);
+
     if(verify){
         const validUser = await user.findOne({"_id" : verify.id });
-    console.log("valid user =>",validUser);
     if(validUser){
     res.status(201);
     req.token = token;

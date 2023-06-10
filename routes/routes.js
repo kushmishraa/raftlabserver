@@ -152,8 +152,9 @@ router.post(`/followUser` , async (req , res)=>{
     const userName=req.body.username;
     const userExists = await User.findOne({username : userName});
     if(userExists){
-        const jwtToken = req.cookies.jwtToken;
-        const loggedInUser = await User.findOne({"authToken" : jwtToken});
+        const jwtToken = req.body.jwtToken;
+        const loggedInUser = await User.findOne({authToken : jwtToken});
+        console.log("logged in user =>",loggedInUser);
         const alreadyFollowing = loggedInUser.following?.indexOf(userName)
 
         if(alreadyFollowing >=0){
@@ -195,7 +196,7 @@ router.post(`/like`,async (req , res)=>{
 })
 
 router.post(`/fetch-comments` , async (req ,res)=>{
-    
+
     const username = req.body.username;
     const img = req.body.image;
    
