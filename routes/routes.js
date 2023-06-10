@@ -64,7 +64,7 @@ router.get(`/upload` , loginValidation , (req , res)=>{
     res.send(req.validUser);
 })
 
-router.get(`/home` , loginValidation , (req,res)=>{
+router.post(`/home` , loginValidation , (req,res)=>{
     res.send(req.validUser)
 })
 

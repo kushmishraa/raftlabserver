@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const user = require('../model/userSchema')
 const loginValidation = async (req , res , next) =>{
    try{ 
-    const token = req.cookies.jwtToken
+    const token = req.body.jwtToken
     console.log("token => " , token)
    
     const verify = jwt.verify(token , process.env.SECRETKEY);
