@@ -22,7 +22,7 @@ try{
 });
 const upload = multer({ storage: storage })
 
-router.get(`${process.env.BASEURL}/` , async (req,res)=>{
+router.get(`${process.env.BASEURL}` , async (req,res)=>{
     res.status(201).json({message:hello});
 })
 
