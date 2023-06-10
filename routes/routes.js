@@ -68,7 +68,7 @@ router.get(`${process.env.BASEURL}/home` , loginValidation , (req,res)=>{
 
 router.post(`${process.env.BASEURL}/login-validation` , async (req , res) =>{
     const {email , password} = req.body;
-    
+    console.log("email=>",email,"password=>",password);
     const userExist = await User.findOne({email : email});
    
     if(userExist){
