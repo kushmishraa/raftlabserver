@@ -10,13 +10,11 @@ require('./db/conn')
 dotenv.config({path : "./config.env"})
 let gfs;
 app.use(cors({
-    origin :"https://6483c8152c003b00b8beaaab--funny-phoenix-352142.netlify.app" ,
-    credentials: false
-}))
-app.use((req, res, next) => {
-    res.header({"Access-Control-Allow-Origin": "https://6483c8152c003b00b8beaaab--funny-phoenix-352142.netlify.app"});
-    next();
-  }) 
+    methods: 'GET,POST,PATCH,DELETE,OPTIONS',
+    optionsSuccessStatus: 200,
+    origin: 'https://6483c5382fa55b031d25b916--funny-phoenix-352142.netlify.app'
+  }));
+pp.options('*', cors());
 app.use(express.json());
 app.use(cookieParser())
 
