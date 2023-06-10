@@ -12,7 +12,7 @@ let gfs;
 app.use(cors({
     methods: 'GET,POST,PATCH,DELETE,OPTIONS',
     optionsSuccessStatus: 200,
-    origin: 'https://6483c5382fa55b031d25b916--funny-phoenix-352142.netlify.app',
+    origin: 'https://6483c5382fa55b031d25b916--funny-phoenix-352142.netlify.app/',
     credentials : true
   }));
 app.options('*', cors());
