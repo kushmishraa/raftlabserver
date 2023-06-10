@@ -97,11 +97,11 @@ router.post(`/login-validation` , async (req , res) =>{
 })
 
 router.post(`/upload`, upload.single('image') , async (req , res)=>{
-    
 
-    const userToken = req.cookies.jwtToken;
+    const userToken = req.body.jwtToken;
     const verifyToken = jwt.verify(userToken , process.env.SECRETKEY);
-    const selectedUser = await User.findOne({"authToken" : userToken});
+    console.log("verify=>",verifyToken)
+    const selectedUser = await User.findOne({"_id" : verifyToken.id});
 
     if(req.file){
         const localFilePath = req.file.path;
