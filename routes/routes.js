@@ -82,7 +82,7 @@ router.post(`/login-validation` , async (req , res) =>{
             expires : new Date(Date.now() + 2592000000),
             httpOnly : false,
           })
-       return res.status(201).json({message : "User verified successfully"});
+       return res.status(201).json({message : "User verified successfully" , token : token});
        }
        else{
      
