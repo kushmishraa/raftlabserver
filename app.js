@@ -14,7 +14,7 @@ app.use(cors({
     optionsSuccessStatus: 200,
     origin: 'https://6483c5382fa55b031d25b916--funny-phoenix-352142.netlify.app'
   }));
-pp.options('*', cors());
+app.options('*', cors());
 app.use(express.json());
 app.use(cookieParser())
 
