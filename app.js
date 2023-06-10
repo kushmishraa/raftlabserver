@@ -11,7 +11,7 @@ dotenv.config({path : "./config.env"})
 app.use(cors({
     methods: 'GET,POST,PATCH,DELETE,OPTIONS',
     optionsSuccessStatus: 200,
-    origin: 'https://funny-phoenix-352142.netlify.app',
+    origin: 'https://heartfelt-duckanoo-ddae4b.netlify.app',
     credentials : true
   }));
 
