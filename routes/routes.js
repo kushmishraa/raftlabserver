@@ -24,7 +24,7 @@ try{
 });
 const upload = multer({ storage: storage })
 
-router.get(`${BASEURL}/`,(req,res)=>{
+router.get("https://raftlabserver.onrender.com/",(req,res)=>{
 res.send("hii")
 })
 
