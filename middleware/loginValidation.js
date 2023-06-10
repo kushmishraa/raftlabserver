@@ -3,6 +3,7 @@ const user = require('../model/userSchema')
 const loginValidation = async (req , res , next) =>{
    try{ 
     const token = req.cookies.jwtToken
+    console.log("token => " , token)
    
     const verify = jwt.verify(token , process.env.SECRETKEY);
 
