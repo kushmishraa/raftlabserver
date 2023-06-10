@@ -8,8 +8,10 @@ const loginValidation = require('../middleware/loginValidation')
 const User = require('../model/userSchema');
 const jwt = require('jsonwebtoken')
 
+
 const uploadToCloudinary = require('../middleware/upload');
 const user = require('../model/userSchema');
+const { json } = require('body-parser');
 
 try{
     var storage = multer.diskStorage({
@@ -22,11 +24,11 @@ try{
 });
 const upload = multer({ storage: storage })
 
-router.get(`${process.env.BASEURL}` , async (req,res)=>{
-    res.status(201).json({message:hello});
+router.get(`/`,(req,res)=>{
+res.send("hii")
 })
 
-router.post(`${process.env.BASEURL}/register-user` , async (req , res)=>{
+router.post(`/register-user` , async (req , res)=>{
     const {fname , lname , email , number , password , username} = req.body
     try{
         const userExists = await User.findOne({email : email});
@@ -62,17 +64,17 @@ router.post(`${process.env.BASEURL}/register-user` , async (req , res)=>{
     }
 });
 
-router.get(`${process.env.BASEURL}/upload` , loginValidation , (req , res)=>{
+router.get(`/upload` , loginValidation , (req , res)=>{
     res.send(req.validUser);
 })
 
-router.get(`${process.env.BASEURL}/home` , loginValidation , (req,res)=>{
+router.get(`/home` , loginValidation , (req,res)=>{
     res.send(req.validUser)
 })
 
-router.post(`${process.env.BASEURL}/login-validation` , async (req , res) =>{
+router.post(`/login-validation` , async (req , res) =>{
     const {email , password} = req.body;
-    console.log("email=>",email,"password=>",password);
+    
     const userExist = await User.findOne({email : email});
    
     if(userExist){
@@ -98,7 +100,7 @@ router.post(`${process.env.BASEURL}/login-validation` , async (req , res) =>{
     }
 })
 
-router.post(`${process.env.BASEURL}/upload`, upload.single('image') , async (req , res)=>{
+router.post(`/upload`, upload.single('image') , async (req , res)=>{
     
 
     const userToken = req.cookies.jwtToken;
@@ -145,12 +147,12 @@ router.post(`${process.env.BASEURL}/upload`, upload.single('image') , async (req
         }
 
     })
-router.get(`${process.env.BASEURL}/findPeople` , async (req , res) =>{
+router.get(`/findPeople` , async (req , res) =>{
     const allUser = await User.find({});
     res.status(201).json({users : allUser});
  
 })
-router.post(`${process.env.BASEURL}/followUser` , async (req , res)=>{
+router.post(`/followUser` , async (req , res)=>{
     const userName=req.body.username;
     const userExists = await User.findOne({username : userName});
     if(userExists){
@@ -170,7 +172,7 @@ router.post(`${process.env.BASEURL}/followUser` , async (req , res)=>{
 
    return res.status(400).json({message : "Username doesn't found"});
 })
-router.post(`${process.env.BASEURL}/getFollowerPost`, async (req , res)=>{
+router.post("/getFollowerPost", async (req , res)=>{
     const username  = req.body.username;
     
     const availUser = await User.findOne({"username" : username})
@@ -179,7 +181,7 @@ router.post(`${process.env.BASEURL}/getFollowerPost`, async (req , res)=>{
     }
 })
 
-router.post(`${process.env.BASEURL}/like`,async (req , res)=>{
+router.post(`/like`,async (req , res)=>{
     const username = req.body.username;
     const likedBy = req.body.likedBy;
     const img = req.body.image;
@@ -196,7 +198,7 @@ router.post(`${process.env.BASEURL}/like`,async (req , res)=>{
     return res.status(400).json({message : "Request failed"})
 })
 
-router.post(`${process.env.BASEURL}/fetch-comments` , async (req ,res)=>{
+router.post(`/fetch-comments` , async (req ,res)=>{
     const username = req.body.username;
    
     const img = req.body.image;
@@ -213,7 +215,7 @@ router.post(`${process.env.BASEURL}/fetch-comments` , async (req ,res)=>{
     }
     
 })
-router.post(`${process.env.BASEURL}/add-comments`, async(req , res)=>{
+router.post(`/add-comments`, async(req , res)=>{
     const commentedby = req.body.parentUser
     const commentedOn = req.body.childUser
     const img = req.body.image
@@ -234,7 +236,7 @@ router.post(`${process.env.BASEURL}/add-comments`, async(req , res)=>{
 
         return res.status(400).json({message : "Unable to post comment"});
 })
-router.post(`${process.env.BASEURL}/addPost` , async(req , res)=>{
+router.post(`/addPost` , async(req , res)=>{
     const {username , bio} = req.body;
     
     const validUser = await User.findOne({"username" : username});
