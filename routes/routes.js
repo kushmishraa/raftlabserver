@@ -22,6 +22,10 @@ try{
 });
 const upload = multer({ storage: storage })
 
+router.get(`${process.env.BASEURL}/` , async (req,res)=>{
+    res.status(201).json({message:hello});
+})
+
 router.post(`${process.env.BASEURL}/register-user` , async (req , res)=>{
     const {fname , lname , email , number , password , username} = req.body
     try{
