@@ -13,10 +13,10 @@ app.use(cors({
     origin : ["*"],
     credentials: false
 }))
-// app.use((req, res, next) => {
-//     res.header({"Access-Control-Allow-Origin": ["http://localhost:3000","https://6483c5382fa55b031d25b916--funny-phoenix-352142.netlify.app","*"]});
-//     next();
-//   }) 
+app.use((req, res, next) => {
+    res.header({"Access-Control-Allow-Origin": "*"});
+    next();
+  }) 
 app.use(express.json());
 app.use(cookieParser())
 
