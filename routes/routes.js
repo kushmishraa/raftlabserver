@@ -7,7 +7,7 @@ const router = express.Router();
 const loginValidation = require('../middleware/loginValidation')
 const User = require('../model/userSchema');
 const jwt = require('jsonwebtoken')
-
+const BASEURL = process.env.BASEURL;
 
 const uploadToCloudinary = require('../middleware/upload');
 const user = require('../model/userSchema');
@@ -24,7 +24,7 @@ try{
 });
 const upload = multer({ storage: storage })
 
-router.get(`/`,(req,res)=>{
+router.get(`${BASEURL}/`,(req,res)=>{
 res.send("hii")
 })
 
