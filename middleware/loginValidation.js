@@ -8,7 +8,7 @@ const loginValidation = async (req , res , next) =>{
     const verify = jwt.verify(token , process.env.SECRETKEY);
     console.log("verify=>",verify);
     if(verify){
-    const validUser = await user.findOne({"authToken" : token});
+        const validUser = await user.findOne({"_id" : verify.id });
     console.log("valid user =>",validUser);
     if(validUser){
     res.status(201);
