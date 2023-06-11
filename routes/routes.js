@@ -112,8 +112,9 @@ router.post(`/upload`, upload.single('image') , async (req , res)=>{
             console.log("profile pic uploading")
             try{
                 const selectedUser = await User.find({});
-                return;
+            
                 console.log("selected user => " , selectedUser);
+                return;
                 console.log("image url => " , result.url);
                 selectedUser.profilePicture = result.url;
                 const profilPicChanged = selectedUser.save();
