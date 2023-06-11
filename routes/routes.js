@@ -111,7 +111,7 @@ router.post(`/upload`, upload.single('image') , async (req , res)=>{
         if(req.body.isProfilePic == "true"){
             console.log("profile pic uploading")
             try{
-                const selectedUser = await User.findOne({"email" : req.body.email})
+                const selectedUser = await User.findOne({"email" : req.body.email}).toArray();
                 console.log("selected user => " , selectedUser);
                 console.log("image url => " , result.url);
                 selectedUser.profilePicture = result.url;
@@ -128,7 +128,8 @@ router.post(`/upload`, upload.single('image') , async (req , res)=>{
                 console.log(err)
             }
         }
-        
+
+        else{
         const verifyToken = jwt.verify(userToken , process.env.SECRETKEY);
         console.log("verify=>",verifyToken);
         const selectedUser = await User.findOne({"_id" : verifyToken.id});
@@ -154,10 +155,10 @@ router.post(`/upload`, upload.single('image') , async (req , res)=>{
         }
 
         }
+    }
         else{
             console.log("image not found");
         }
-
     })
 router.get(`/findPeople` , async (req , res) =>{
     const allUser = await User.find({});
