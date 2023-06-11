@@ -69,13 +69,16 @@ router.post(`/home` , loginValidation , (req,res)=>{
 })
 
 router.post(`/login-validation` , async (req , res) =>{
+    console.log("login verification started [1/3]")
     const {email , password} = req.body;
     
     const userExist = await User.findOne({email : email});
    
     if(userExist){
+        console.log("login verification started [2/3]")
        const validUser= await bcrypt.compare(password , userExist.password);
        if(validUser){
+        console.log("login verification started [3/3]")
         const token = await userExist.generateAuthToken();
         console.log("token generated =>",token)
         res.cookie('jwtToken' , token , {
