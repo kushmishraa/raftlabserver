@@ -102,7 +102,7 @@ router.post(`/login-validation` , async (req , res) =>{
 
 router.post(`/upload`, upload.single('image') , async (req , res)=>{
     const userToken = req.body.jwtToken;
-    
+    console.log("EMAIL =>" , req.body.email)
     if(req.file){
         const localFilePath = req.file.path;
         const result = await uploadToCloudinary(localFilePath,req.file);
