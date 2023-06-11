@@ -110,11 +110,13 @@ router.post(`/upload`, upload.single('image') , async (req , res)=>{
     if(req.file){
         const localFilePath = req.file.path;
         const result = await uploadToCloudinary(localFilePath,req.file);
-
+        console.log("file found")
         if(req.body.isProfilePic == "true"){
-            const selectedUser = await User.findOne({email : req.body.email})
+            console.log("profile pic uploading")
+            const selectedUser = await User.findOne({email : req.body.email});
+            console.log("image url => " , result.url);
             selectedUser.profilePicture = result.url;
-            const profilPicChanged = selectedUser.save()
+            const profilPicChanged = selectedUser.save();
             if(profilPicChanged){
                 console.log("profile pic updated")
                 return res.status(201).json({message : "Profile pic updated"})
