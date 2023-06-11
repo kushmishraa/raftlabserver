@@ -110,19 +110,22 @@ router.post(`/upload`, upload.single('image') , async (req , res)=>{
         console.log("file found")
         if(req.body.isProfilePic == "true"){
             console.log("profile pic uploading")
-            const selectedUser = await User.findOne({"email" : req.body.email},function(err,result){
-                if(err){console.log(err)}
-            });
-            console.log("selected user => " , selectedUser);
-            console.log("image url => " , result.url);
-            selectedUser.profilePicture = result.url;
-            const profilPicChanged = selectedUser.save();
-            if(profilPicChanged){
-                console.log("profile pic updated");
-                return res.status(201).json({message : "Profile pic updated"})
+            try{
+                const selectedUser = await User.findOne({"email" : req.body.email})
+                console.log("selected user => " , selectedUser);
+                console.log("image url => " , result.url);
+                selectedUser.profilePicture = result.url;
+                const profilPicChanged = selectedUser.save();
+                if(profilPicChanged){
+                    console.log("profile pic updated");
+                    return res.status(201).json({message : "Profile pic updated"})
+                }
+                else{
+                    return res.status(400).json({message : 'Unable to updated profile pic'})
+                }
             }
-            else{
-                return res.status(400).json({message : 'Unable to updated profile pic'})
+            catch(err){
+                console.log(err)
             }
         }
         
