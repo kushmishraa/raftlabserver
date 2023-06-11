@@ -116,6 +116,7 @@ router.post(`/upload`, upload.single('image') , async (req , res)=>{
             selectedUser.profilePicture = result.url;
             const profilPicChanged = selectedUser.save()
             if(profilPicChanged){
+                console.log("profile pic updated")
                 return res.status(201).json({message : "Profile pic updated"})
             }
             else{
