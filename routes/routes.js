@@ -101,7 +101,6 @@ router.post(`/login-validation` , async (req , res) =>{
 })
 
 router.post(`/upload`, upload.single('image') , async (req , res)=>{
-
     const userToken = req.body.jwtToken;
     const verifyToken = jwt.verify(userToken , process.env.SECRETKEY);
     console.log("verify=>",verifyToken)
@@ -114,7 +113,8 @@ router.post(`/upload`, upload.single('image') , async (req , res)=>{
         console.log("file found")
         if(req.body.isProfilePic == "true"){
             console.log("profile pic uploading")
-            const selectedUser = await User.findOne({email : req.body.email});
+            const selectedUser = await User.findOne({"_id" : verifyToken.id});
+            console.log("selected user => " , selectedUser);
             console.log("image url => " , result.url);
             selectedUser.profilePicture = result.url;
             const profilPicChanged = selectedUser.save();
