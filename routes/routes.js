@@ -110,6 +110,7 @@ router.post(`/upload`, upload.single('image') , async (req , res)=>{
     if(req.file){
         const localFilePath = req.file.path;
         const result = await uploadToCloudinary(localFilePath,req.file);
+        console.log("upload result =>" , result);
         console.log("file found")
         if(req.body.isProfilePic == "true"){
             console.log("profile pic uploading")
