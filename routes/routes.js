@@ -146,6 +146,9 @@ router.post(`/upload`, upload.single('image') , async (req , res)=>{
         }
 
         }
+        else{
+            console.log("image not found");
+        }
 
     })
 router.get(`/findPeople` , async (req , res) =>{
