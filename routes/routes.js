@@ -111,7 +111,7 @@ router.post(`/upload`, upload.single('image') , async (req , res)=>{
         if(req.body.isProfilePic == "true"){
             console.log("profile pic uploading")
             try{
-                const selectedUser = await User.findOne({"email" : req.body.email}).toArray();
+                const selectedUser = await User.findOne({ email : req.body.email});
                 console.log("selected user => " , selectedUser);
                 console.log("image url => " , result.url);
                 selectedUser.profilePicture = result.url;
