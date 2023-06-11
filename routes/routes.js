@@ -85,16 +85,17 @@ router.post(`/login-validation` , async (req , res) =>{
             expires : new Date(Date.now() + 2592000000),
             httpOnly : false,
           })
+        console.log("login verified successfully [3/4]")
        return res.status(201).json({message : "User verified successfully" , token : token});
        }
        else{
-     
+        console.log("login verification failed [2/4]")
         return res.status(400).json({message : "Invalid Credential"})
        }
         
     }
     else{
-       
+        console.log("login verification failed [1/4]")
         res.status(400).json({message : "Invalid Credentials"});
     }
 })
